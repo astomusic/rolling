@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import { Title } from 'root/styles/common/Typography';
 import { media } from 'root/styles/style';
 
+// 변수로 받을 type 선언
 interface RollingBoardProps {
   deg: string;
 }
@@ -17,6 +18,7 @@ interface InputProps {
   matched: boolean;
 }
 
+// 회전 animation을 위한 keyframes
 const roll = (deg: string) => keyframes`
   from {
     transform: rotate(0deg);
@@ -26,6 +28,7 @@ const roll = (deg: string) => keyframes`
   }
 `;
 
+// 보드, 입력창을 감싸는 아이
 const Wrapper = styled.div`
   display: flex;
   ${media.mobile`
@@ -34,6 +37,7 @@ const Wrapper = styled.div`
   `}
 `;
 
+// 보드를 감싸는 아이
 const BoardWrapper = styled.div`
   display: flex;
   ${media.mobile`
@@ -41,6 +45,7 @@ const BoardWrapper = styled.div`
   `}
 `;
 
+// 회전판
 const RollingBoard = styled.div<RollingBoardProps>`
   width: 300px;
   height: 300px;
@@ -58,6 +63,7 @@ const RollingBoard = styled.div<RollingBoardProps>`
   }
 `;
 
+// roll 버튼
 const RollBtn = styled.div`
   width: 120px;
   height: 50px;
@@ -75,6 +81,7 @@ const RollBtn = styled.div`
   `}
 `;
 
+// 회전판 뒤에 6분할 영역
 const Pie = styled.div<PieProps>`
   position: absolute;
   width: 350px;
@@ -86,6 +93,7 @@ const Pie = styled.div<PieProps>`
   z-index: 1;
 `;
 
+// 입력창을 감싸는 아이
 const InputWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -97,6 +105,7 @@ const InputWrapper = styled.div`
   `}
 `;
 
+// 입력창
 const StyledInput = styled.input<InputProps>`
   border: ${({ matched }) => (matched ? '2px solid red' : '2px solid #ccc')};
   color: #666;
@@ -121,10 +130,11 @@ const Welcome = () => {
   const [animation, setAnimation] = useState('');
   const [matched, setMatched] = useState('');
 
+  // 랜덤으로 숫자를 뽑아주는 아이
   const getRandomNumber = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min) + min);
   };
-
+  // 뽑은 숫자가 어디에 걸리는지 확인하는 아이
   const checkMatched = (target: number) => () => {
     const tempTarget = target - 3600;
     if (270 < tempTarget && tempTarget <= 330) {
@@ -142,6 +152,7 @@ const Welcome = () => {
     }
   };
 
+  // 돌려주는 아이
   const handleRoll = () => {
     setMatched('');
     const random = getRandomNumber(3600, 3960);
@@ -150,6 +161,7 @@ const Welcome = () => {
     setTimeout(checkMatched(random), 3000);
   };
 
+  // 화면구성
   return (
     <React.Fragment>
       <Title
