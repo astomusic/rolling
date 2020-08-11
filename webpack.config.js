@@ -113,18 +113,10 @@ module.exports = (env) => {
       }),
     ],
     devServer: {
-      host: 'local.looxidlabs.com',
+      host: 'local.rolling.com',
       port: port,
       open: true,
       historyApiFallback: true,
-      proxy: [
-        {
-          context: ['/api'],
-          target: 'https://dev.lucy.looxidlabs.com',
-          secure: true,
-          changeOrigin: true,
-        },
-      ],
     },
   };
 };
